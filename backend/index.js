@@ -9,7 +9,6 @@ const fileUploadRoutes=require('./routes/fileUploadRoutes');
 const chatRoutes=require('./routes/chatRoutes');
 const bodyParser = require('body-parser');
 
-
 mongoose.set("strictQuery", true);
 mongoose.connect('mongodb://0.0.0.0:27017/hackniche', { useUnifiedTopology: true, useNewUrlParser: true, });
 mongoose.connection.on('error', err => console.log(err));
@@ -21,11 +20,13 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/ProfileImages", express.static("ProfileImages"));
 
 app.use('/', loginRoutes);
 app.use('/admin', adminRoutes);
 app.use('/file',fileUploadRoutes);
 app.use('/chat',chatRoutes);
+
 
 // const http = require('http');
 // const server = http.createServer(app);
