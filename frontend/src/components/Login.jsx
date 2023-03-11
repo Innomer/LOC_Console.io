@@ -174,7 +174,8 @@ const Login = () => {
   });
 
   const ChangeButton = styled(Button)({
-    backgroundColor: "#036a6b",
+    // backgroundColor: "#036a6b",
+    borderStyle: " 1px solid #036a6b",
     margin: "1rem",
     borderRadius: "3rem",
     marginLeft: "1.2rem",
@@ -183,7 +184,7 @@ const Login = () => {
     width: "10rem",
     color: "white",
     fontSize: "0.8rem",
-    "&:hover": { backgroundColor: "#5E9387", color: "white" },
+    "&:hover": { backgroundColor: "#036a6b", color: "white" },
   });
 
   const [open, setOpen] = useState(true);

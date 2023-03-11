@@ -50,7 +50,7 @@ const Landing = () => {
     padding: "10px 20px  ",
     backgroundColor:'black',
     // backgroundImage: " linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%)",
-    "&:hover": { backgroundColor: "rgba(255, 0, 0, 0.5)" },
+    "&:hover": { backgroundColor: "rgba(255, 0, 0, 0.5)", textDecoration: 'none' },
   });
 
   const SignupButton = styled(Button)({

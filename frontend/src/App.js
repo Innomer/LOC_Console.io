@@ -11,24 +11,26 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Form from "./components/Form";
 
 function App() {
+  // const user = localStorage.getItem("token");
+  const user = true;
   return (
     <div className="App">
     <Router>
         <Routes>
-          <Route path="/landing" element={<Landing/>}>
+          <Route path="/" element={<Landing/>}>
           </Route>
           <Route path="/login" element={<Login/>}>
           </Route>
-          <Route path="/home" element={<Home/>}>
-          </Route>
-          <Route path="/form" element={<Form/>}>
-          </Route>
-          <Route path="/profile" element={<Profile/>}>
-          </Route>
-          <Route path="/privacy" element={<Privacy/>}>
-          </Route>
-          <Route path="/" element={<FaceCapture/>}>
-          </Route>
+          {user && <Route path="/home" element={<Home/>}>
+          </Route>}
+          {user && <Route path="/form" element={<Form/>}>
+          </Route>}
+          {user && <Route path="/profile" element={<Profile/>}>
+          </Route>}
+          {user && <Route path="/privacy" element={<Privacy/>}>
+          </Route>}
+          {user && <Route path="/faceCapture" element={<FaceCapture/>}>
+          </Route>}
 
         </Routes>
       
