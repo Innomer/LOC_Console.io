@@ -1,0 +1,17 @@
+.fromcenter:hover:after {
+    transform: scaleX(1);
+}
+
+.fromcenter:after {
+    display      : block;
+    content      : '';
+    /* border-bottom: solid 5px #fff; */
+    border-bottom: solid 5px blue;
+    transform    : scaleX(0);
+    transition   : transform 200ms ease-in-out;
+}
+
+html{
+  /* color: black; */
+  color: white;
+}

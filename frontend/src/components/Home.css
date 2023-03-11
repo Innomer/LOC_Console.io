@@ -1,0 +1,43 @@
+.background{
+    height: 100vh;
+    background-color: #d1faf3;
+}
+
+.document{
+    margin-left: 5em;
+    height: 80vh;
+    width: 40em;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow:  20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff;
+
+}
+
+.tab-box{
+    width: 80% !important;
+    margin-left: 10% !important;
+    border-radius: 64px !important;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.card-box{
+    align-items: center;
+    margin: 2em;
+    margin-bottom: -1em;
+}
+.card-box img{
+    height: 12em;
+    width: 20em;
+    border-radius: 1em;
+    object-fit: cover;
+}
+
+.projectCard-text{
+    align-items: center;
+    max-width: 20em;
+}
+.projectCard-text h4{
+    margin-top: 0.5em;
+}
