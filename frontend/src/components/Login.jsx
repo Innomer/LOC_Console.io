@@ -358,7 +358,7 @@ const Login = () => {
 
                 <div style={{ display: "flex" }}>
                   {/* <Link to="/password-reset"> */}
-                  <ChangeButton>Forgot Password</ChangeButton>
+                  <ChangeButton variant="outlined">Forgot Password</ChangeButton>
                   <SignupButton type="submit" onClick={showToastMessage}>Log in</SignupButton>
                   <ToastContainer/>
                   {/* </Link> */}

@@ -42,6 +42,7 @@ const Landing = () => {
 
   const LoginButton = styled(Button)({
     right: resp ? "10vw" : "10vw",
+    // width:50,
     borderRadius: "0.5rem",
     marginLeft: "0.2rem",
     textDecoration: "none",
@@ -136,7 +137,7 @@ const Landing = () => {
     backgroundImage: `url(${homeimg})`,
     height: "38rem",
     maxWidth: "100vw",
-    width: "80vw",
+    width: "85vw",
     backgroundSize: "cover",
     // backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
