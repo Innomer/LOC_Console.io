@@ -26,12 +26,17 @@
     align-items: center;
     margin: 2em;
     margin-bottom: -1em;
+    border: 2px solid black;
+    
 }
 .card-box img{
     height: 12em;
     width: 20em;
     border-radius: 1em;
     object-fit: cover;
+    background-color: #fff;
+    border: 2px solid black;
+    width: 100rem;
 }
 
 .projectCard-text{

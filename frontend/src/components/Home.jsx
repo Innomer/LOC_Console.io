@@ -3,20 +3,22 @@ import Grid from "@mui/material/Grid";
 import './Home.css';
 import Navbar from './Navbar.jsx';
 import './Navbar.css';
-import { ProjectCard } from './Documents';
+import { ProjectCard } from './Documents.jsx';
 import AadharCard from '../images/AadharCard.jpg'
 
 const Home = () => {
     const projects = [
         {
             title: 'Aadhar Card',
-            imgUrl: AadharCard,
+            imgUrl: '../images/AadharCard.jpg',
         },
         {
             title: 'Aadhar Card',
-            imgUrl: AadharCard,
+            imgUrl: '../images/AadharCard.jpg',
         },
     ]
+    
+    
     return (
         <>
         <Box className="background">

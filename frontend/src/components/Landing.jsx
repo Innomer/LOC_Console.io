@@ -232,32 +232,12 @@ const Landing = () => {
         overflow: "hidden", height:'100vh'
       }}
     >
-      {/* <div
-        style={{
-          width: "25rem",
-          height: "20rem",
-          backgroundImage: `url(${illustration})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          position: "relative",
-          top: "5rem",
-          left: "5rem",
-        //   opacity: "0.8",
-        }}
-      ></div> */}
       <Navbar />
       <Grid container spacing={2}>
         <Grid
           xs={5}
           style={{
-            // position: "relative",
-            // top:'10rem',
-            // marginLeft:resp ? '35vw' : '45vw',
             marginTop: "5rem",
-            // display: "flex",
-            // flexDirection:'row',
-            // justifyContent: "left",
           }}
         >
           <p
@@ -300,12 +280,12 @@ const Landing = () => {
             Secure documents with us.{" "}
           </p>
           <div style={{position:'relative', top:'1rem', left:'7rem'}}>
-            {/* <Link to="/register/client"> */}
+            <Link to="/login">
             <SignupButton>Sign up</SignupButton>
-            {/* </Link> */}
-            {/* <Link to="/register/worker"> */}
+            </Link>
+            <Link to="/login">
             <LoginButton>Login</LoginButton>
-            {/* </Link> */}
+            </Link>
           </div>
         </Grid>
         <Grid xs={7}>

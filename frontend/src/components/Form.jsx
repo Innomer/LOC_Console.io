@@ -23,20 +23,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import Toastify from 'toastify-js'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-const Profile = () => {
-
-    const dataStyle = {border:'1px solid black', borderRadius:'10px', padding:'3px 15px ', textAlign:'left'}
+const Form = () => {
     const showToastMessage = () => {
         toast.success('Submit Successfully  !', {
             position: toast.POSITION.BOTTOM_RIGHT
         });
     };
 
-   
-    
   const fieldStyle = { color: "white", marginBottom: "1rem", width: "25rem" };
   const SubmitBtn = styled(Button)({
     right:"10vw",
@@ -49,7 +43,7 @@ const Profile = () => {
     backgroundColor:'black',
     // backgroundImage: " linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%)",
     "&:hover": { backgroundColor: "white" , color:'black'},
-    position:'relative',right:'10rem',top:'1rem'
+    position:'relative',left:'9rem',top:'1rem'
   });
   const EditBtn = styled(Button)({
     right:"10vw",
@@ -62,7 +56,7 @@ const Profile = () => {
     backgroundColor:'transparent',
     // backgroundImage: " linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%)",
     "&:hover": { backgroundColor: "white" },
-    position:'relative',right:'10rem',top:'1rem'
+    position:'relative',left:'8rem',top:'1rem'
   });
 
     // ⭐⭐
@@ -83,40 +77,81 @@ const Profile = () => {
   return (
     <>
     <Navbar/>
-    <div >
+    <div data-aos="fade-up">
       <Paper
         elevation={3}
-        style={{ backgroundColor: "#d1faf3", margin: "0rem 5rem", width:'39rem', padding:'1rem' , height:'25rem'}}
+        style={{ backgroundColor: "#d1faf3", margin: "0rem 5rem" }}
       >
-        <h2 style={{ margin: "5px",  position:'relative', top:'1rem', textAlign:'left'}}>Profile</h2>
+        <h2 style={{ margin: "2rem 0 4rem 0",  position:'relative', top:'1rem'}}>Set up your profile</h2>
         <Grid container spacing={2}>
-          
-          <Grid xs={6} style={{}}>
-            <h3 style={{ position:'relative', right:'7rem'}}>Name</h3>
-            <h4 style={{border:'1px solid black', borderRadius:'10px', padding:'3px 15px ', textAlign:'left', width:'15rem'}}>Jigar Siddhpura</h4>
-            <h3 style={{ position:'relative', right:'7.5rem'}}>DOB</h3>
-            <h4 style={{border:'1px solid black', borderRadius:'10px', padding:'3px 15px ', textAlign:'left', width:'8rem'}}>28-11-2003</h4>
-            <h3 style={{ position:'relative', left:'5rem', bottom:'6.5rem'}}>Phone No.</h3>
-            <h4 style={{border:'1px solid black', borderRadius:'10px', padding:'3px 15px ', textAlign:'left', width:'10rem', position:'relative', left:'11rem', bottom:'6.5rem'}}>8451078717</h4>
+          <Grid xs={3}>
+            <Paper
+              elevation={5}
+              style={{ width: "18rem", height: "23rem" ,
+               position:'relative', left:'2rem'
+            }}
+            ></Paper>
+            <h4 style={{ margin: "2rem 0 2rem 0"}}>Enter your picture</h4>
+          </Grid>
+          <Grid xs={4} style={{}}>
+            <h4 style={{ position:'relative', right:'10rem', marginBottom:'1rem'}}>Enter Name</h4>
+            <TextField
+              id="outlined-search"
+              label="Name"
+              type="search"
+              name="Name"
+              required
+              style={fieldStyle}
+            />
+            <h4 style={{ position:'relative', right:'11rem', marginBottom:'1rem'}}>DOB</h4>
+            <TextField
+              id="outlined-search"
+              type="date"
+              name="Name"
+              required
+              style={fieldStyle}
+            />
+            <h4 style={{ position:'relative', right:'10rem', marginBottom:'1rem'}}>Phone No.</h4>
+            <TextField
+              id="outlined-search"
+              label="Phone no."
+              type="search"
+              name="Name"
+              required
+              style={fieldStyle}
+            />
             </Grid>
-            <Grid xs={6} style={{}}>
-            <h3 style={{ position:'relative', right:'10rem'}}>Email</h3>
-            <h4 style={{border:'1px solid black', borderRadius:'10px', padding:'3px 15px ', textAlign:'left', width:'16rem',position:'relative', right:'3rem' }}>jigarssidhpura@loc.com</h4>
-            <h3 style={{ position:'relative', right:'3.5rem'}}>Location</h3>
-            <h4 style={{border:'1px solid black', borderRadius:'10px', padding:'3px 15px ', textAlign:'left', width:'10rem',position:'relative',left:'3rem'}}>Mumbai</h4>
+            <Grid xs={3} style={{}}>
+            <h4 style={{ position:'relative', right:'9rem', marginBottom:'1rem'}}>Email</h4>
+            <TextField
+              id="outlined-search"
+              label="Email"
+              type="search"
+              name="Name"
+              required
+              style={fieldStyle}
+            />
+            <h4 style={{ position:'relative', right:'8rem', marginBottom:'1rem'}}>Location</h4>
+            <TextField
+              id="outlined-search"
+              label="location"
+              type="search"
+              name="Name"
+              required
+              style={fieldStyle}
+            />
             {/* <Link to="/register/worker"> */}
             
-            <EditBtn>Edit</EditBtn> 
-             <SubmitBtn onClick={showToastMessage}>Submit</SubmitBtn>
-
+            <EditBtn>Edit</EditBtn>
+            <SubmitBtn onClick={showToastMessage}>Submit</SubmitBtn>
             <ToastContainer/>
             {/* </Link> */}
           </Grid>
         </Grid>
       </Paper>
-    </div>
+      </div>
     </>
   );
 };
 
-export default Profile;
+export default Form;
