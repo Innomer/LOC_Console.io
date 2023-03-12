@@ -3,7 +3,7 @@ const { signUpController, loginController, pwResetEmailController, pwLinkVerifie
 const router = express.Router();
 
 
-router.post('/signup/:role',signUpController);
+router.post('/signup',signUpController);
 router.post('/login',loginController);
 router.post('/password-reset',pwResetEmailController);
 router.get('/password-change/:ident/:today-:hash',pwLinkVerifier);

@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import FaceCapture from "./components/FaceCapture";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Form from "./components/Form";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   // const user = localStorage.getItem("token");

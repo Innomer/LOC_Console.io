@@ -6,17 +6,29 @@ import Button from "@mui/material/Button";
 import { styled, alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
+import axios from "axios";
+// import Webcam from 'react-webcam'
+import { display } from "@mui/system";
+// import React, { useState } from "react";
+import Webcam from "react-webcam";
+import './FaceCapture.css';
+const WebcamComponent = () => <Webcam />;
+const videoConstraints = {
+  width: 400,
+  height: 400,
+  facingMode: "user",
 };
+// const WebcamComponent = ()=><Webcam/>
+// const customStyles = {
+//   content: {
+//     top: "50%",
+//     left: "50%",
+//     right: "auto",
+//     bottom: "auto",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//   },
+// };
 
 const style = {
   position: "absolute",
@@ -48,7 +60,7 @@ function FaceCapture() {
       });
 
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -87,7 +99,7 @@ function FaceCapture() {
 
     ctx.drawImage(video, 0, 0, width, height);
 
-    setShow(!show);
+    // setShow(!show);
   };
 
   const clearImage = () => {
@@ -98,17 +110,73 @@ function FaceCapture() {
     ctx.clearRect(0, 0, photo.width, photo.height);
   };
 
+  const [data , setData] = useState({
+    image : '',
+  })
+
+  const handleImageUpload = (e) => {
+    console.log("Handle Image Upload");
+    console.log(e.target.files[0]);
+    console.log(e.target.files[0].name);
+    setData({...data , image:e.target.files[0]})
+  }
+
+  const handleImageSubmit = async (e) => {
+    console.log(data);
+    console.log(data.image, data.image.name);
+    console.log("Handle Submit");
+    e.preventDefault();
+    let url = "http://localhost:8080/addListing";
+    const formdata = new FormData();
+    formdata.append("file", data.image);
+    console.log("After appending in formData");
+    try {
+      let response = await axios.post(url , formdata)
+      if(response.status === 200) {
+        console.log("addListing API successfully called from frontend");
+      }
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+
   useEffect(() => {
     getVideo();
   }, [videoRef]);
 
-  const [show, setShow] = useState(false)
+//   const [show, setShow] = useState(false)
+//   const WebcamComponent = () => <Webcam />
+// const videoConstraints = {
+//   width: 400,
+//   height: 400,
+//   facingMode: 'user',
+// }
+//   const [picture, setPicture] = useState('')
+//   const webcamRef = React.useRef(null)
+//   const capture = React.useCallback(() => {
+//     const pictureSrc = webcamRef.current.getScreenshot()
+//     setPicture(pictureSrc)
+//   })
+
+const [picture, setPicture] = useState("");
+  const webcamRef = React.useRef(null);
+  const capture = React.useCallback(() => {
+    const pictureSrc = webcamRef.current.getScreenshot();
+    setPicture(pictureSrc);
+  });
+
+  const handleSubmit=()=>{
+    console.log(picture);
+  }
+
 
   return (
+    
     <>
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
-        <Modal
+        {/* <Button onClick={handleOpen}>Open modal</Button> */}
+        {/* <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
@@ -119,15 +187,109 @@ function FaceCapture() {
 
             <video ref={videoRef} className="container"></video>
 
-            <SubmitBtn onClick={takePicture} >Take Picture</SubmitBtn>
+            <SubmitBtn onClick={takePicture} onChange={handleImageUpload}>Take Picture</SubmitBtn>
 
-            <canvas className="container" ref={photoRef}></canvas>
-
-            <SubmitBtn onClick={clearImage} style={{display : show? "" : 'none'}}>Clear Image</SubmitBtn>
-            <SubmitBtn style={{position:'relative',right:'9rem',top:'3rem',display : show? "" : 'none'}}>Submit</SubmitBtn>
+            <canvas className="container" ref={photoRef} onChange={handleImageUpload}></canvas>
+            <SubmitBtn onClick={clearImage} style={{display : show}}>Clear Image</SubmitBtn>
+            <SubmitBtn onSubmit={handleSubmit} style={{position:'relative',right:'9rem',top:'3rem',display : show}}>Submit</SubmitBtn>
             <br />
             <br />
           </div>
+        </Modal> */}
+        <Modal open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description" >
+        {/* <h2 className="mb-5 text-center">
+        React Photo Capture using Webcam Examle
+      </h2> */}
+      {/* <div>
+        {picture == '' ? (
+          <Webcam
+            audio={false}
+            height={400}
+            ref={webcamRef}
+            width={400}
+            screenshotFormat="image/jpeg"
+            videoConstraints={videoConstraints}
+          />
+        ) : (
+          <img src={picture} />
+        )}
+      </div> */}
+      {/* <div>
+        {picture != '' ? (
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              setPicture()
+            }}
+            className="btn btn-primary"
+          >
+            Retake
+          </button>
+        ) : (
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              capture()
+            }}
+            className="btn btn-danger"
+          >
+            Capture
+          </button>
+        )}
+      </div> */}
+    <div>
+      <div className="mainDiv">
+        <h2 className="mb-5 text-center">
+          React Photo Capture using Webcam Examle
+        </h2>
+        <div>
+          {picture === "" ? (
+            <Webcam
+              audio={false}
+              height={400}
+              ref={webcamRef}
+              width={400}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+            />
+          ) : (
+            <img src={picture} />
+          )}
+        </div>
+        <div>
+          {picture != "" ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setPicture();
+              }}
+              className="btn btn-primary"
+            >
+              Retake
+            </button>
+          ) : (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                capture();
+              }}
+              className="btn btn-danger"
+            >
+              Capture
+            </button>
+          )}
+        </div>
+        <div>
+          <img src={picture}></img>
+        </div>
+        {picture!=""?
+        <button onClick={handleSubmit}>Submit</button>
+        :<button style={{display:"none"}}></button>}
+      </div>
+    </div>
         </Modal>
       </div>
     </>

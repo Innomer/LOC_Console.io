@@ -22,6 +22,7 @@ import { animated, useTrail } from "@react-spring/web";
 import "./Login.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FaceCapture from "./FaceCapture";
 
 const theme = createTheme({
   palette: {
@@ -44,6 +45,7 @@ const signupDefaultValue = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const showToastMessage = () => {
     toast.success('Logged In  !', {
         position: toast.POSITION.BOTTOM_LEFT,
@@ -106,18 +108,72 @@ const Login = () => {
     return errors;
   };
 
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
 
   // login func end
 
   // signup func start
 
   const [signupUser, setSignupUser] = useState(signupDefaultValue);
+  const [loginUser, setloginUser] = useState(defaultValue);
+  const [modal, setModal] = useState(false);
 
   const signupHandleChange = (e) => {
+    console.log("SignUp Handle Change")
     console.log(e.target.name, e.target.value);
     setSignupUser({ ...signupUser, [e.target.name]: e.target.value });
   };
+  
+  const signupHandleSubmit = (e) => {
+    console.log("SignUp Handle Submit");
+     // console.log("Handle submit")
+     e.preventDefault();
+     // console.log(user)
+     console.log("before validate");
+    //  setError(validate(user));
+     console.log("after validate");
+    //  console.log(errorS);
+     console.log("after printing error");
+ 
+     console.log(signupUser);
+     console.log("before fetch api ");
+ 
+     var myHeaders = new Headers();
+     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+ 
+     var urlencoded = new URLSearchParams();
+     urlencoded.append("email", signupUser.email);
+     urlencoded.append("password", signupUser.password);
+     urlencoded.append("lname", signupUser.lname);
+     urlencoded.append("fname", signupUser.fname);
+ 
+     var requestOptions = {
+       method: 'POST',
+       headers: myHeaders,
+       body: urlencoded,
+       redirect: 'follow'
+     };
+     fetch("http://localhost:8080/signup", requestOptions)
+       .then(response => {
+         localStorage.removeItem("secret_token");
+         localStorage.removeItem("isVerified");
+         localStorage.removeItem("email");
+         return response.json();
+       })
+       .then(result => {
+         console.log(result);
+         localStorage.setItem("secret_token", result.token);
+         localStorage.setItem("isVerified", result.isVerified);
+         localStorage.setItem("email",user.email);
+         return result;
+       })
+       .then(r => {
+         if (r.token) {
+          navigate('/profile');
+         }
+         
+       })
+       .catch(err => console.log('error', err))}
 
   const signupValidate = (values) => {
     const errors = {};
@@ -141,6 +197,63 @@ const Login = () => {
     return errors;
   };
 
+  const loginHandleChange = (e) => {
+    console.log("Login Handle Change")
+    console.log(e.target.name, e.target.value);
+    setloginUser({ ...loginUser, [e.target.name]: e.target.value });
+  };
+  const loginHandleSubmit = (e) => {
+    console.log("Login Handle Submit");
+     // console.log("Handle submit")
+     e.preventDefault();
+     // console.log(user)
+     console.log("before validate");
+    //  setError(validate(user));
+     console.log("after validate");
+    //  console.log(errorS);
+     console.log("after printing error");
+ 
+     console.log(loginUser);
+     console.log("before fetch api ");
+ 
+     var myHeaders = new Headers();
+     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+ 
+     var urlencoded = new URLSearchParams();
+     urlencoded.append("email", loginUser.email);
+     urlencoded.append("password", loginUser.password);
+    //  urlencoded.append("lname", signupUser.email);
+    //  urlencoded.append("fname", signupUser.password);
+ 
+     var requestOptions = {
+       method: 'POST',
+       headers: myHeaders,
+       body: urlencoded,
+       redirect: 'follow'
+     };
+    //  navigate('/faceCapture');
+    setModal(true);
+     fetch("http://localhost:8080/login", requestOptions)
+       .then(response => {
+         localStorage.removeItem("secret_token");
+         localStorage.removeItem("isVerified");
+         localStorage.removeItem("email");
+         return response.json();
+       })
+       .then(result => {
+         console.log(result);
+         localStorage.setItem("secret_token", result.token);
+         localStorage.setItem("isVerified", result.isVerified);
+         localStorage.setItem("email",user.email);
+         return result;
+       })
+       .then(r => {
+         if (r.token) {
+          navigate('/faceCapture');
+         }
+         
+       })
+       .catch(err => console.log('error', err))}
   // signup func end
 
   const SignupButton = styled(Button)({
@@ -148,11 +261,11 @@ const Login = () => {
     // backgroundColor: "#2E2532",
     backgroundImage: "  linear-gradient(90deg, #64c0c2 8%, #9bc0bb 93%)",
     margin: "1rem",
-    borderRadius: "3rem",
+    borderRadius: "1rem",
     marginLeft: "1.2rem",
     textDecoration: "none",
-    padding: "12px 15px ",
-    width: "10rem",
+    padding: "8px 10px ",
+    width: "8rem",
     color: "white",
     fontSize: "0.8rem",
     "&:hover": { backgroundColor: "#5E9387", color: "white" },
@@ -177,12 +290,12 @@ const Login = () => {
     // backgroundColor: "#036a6b",
     borderStyle: " 1px solid #036a6b",
     margin: "1rem",
-    borderRadius: "3rem",
-    marginLeft: "1.2rem",
+    borderRadius: "1rem",
+    marginLeft: "4rem",
     textDecoration: "none",
-    padding: "12px 15px ",
+    padding: "8px 10px ",
     width: "10rem",
-    color: "white",
+    color: "#036a6b",
     fontSize: "0.8rem",
     "&:hover": { backgroundColor: "#036a6b", color: "white" },
   });
@@ -267,7 +380,7 @@ const Login = () => {
           <AnimatedGrid item xs={6} style={props}>
             <form
               className="inputBox"
-              // onSubmit={handleSubmit}
+              onSubmit={loginHandleSubmit}
             >
               <Box
                 sx={{
@@ -306,15 +419,15 @@ const Login = () => {
                     label="Email"
                     placeholder="Email"
                     name="email"
-                    value={user.email}
-                    onChange={handleChange}
+                    // value={user.email}
+                    onChange={loginHandleChange}
                   />
                 </FormControl>
                 <FormControl
                   sx={{ width: resp ? "40ch" : "50ch" }}
                   variant="outlined"
                   value={user.password}
-                  onChange={handleChange}
+                  onChange={loginHandleChange}
                   required
                 >
                   <InputLabel htmlFor="outlined-adornment-password">
@@ -399,7 +512,7 @@ const Login = () => {
           >
             <form
               className="inputBox"
-              // onSubmit={signupHandleSubmit}
+              onSubmit={signupHandleSubmit}
             >
               <Box
                 sx={{
@@ -439,7 +552,7 @@ const Login = () => {
                     label="FirstName"
                     placeholder="First Name"
                     name="fname"
-                    value={signupUser.fname}
+                    // value={signupUser.fname}
                     onChange={signupHandleChange}
                     style={{ margin: "1rem 0", width: resp ? "17ch" : "24ch" }}
                   />
@@ -450,7 +563,7 @@ const Login = () => {
                     label="Lastname"
                     placeholder="Last Name"
                     name="lname"
-                    value={signupUser.lname}
+                    // value={signupUser.lname}
                     onChange={signupHandleChange}
                     required
                     style={{ margin: "1rem ", width: resp ? "17ch" : "24ch" }}
@@ -460,7 +573,7 @@ const Login = () => {
                 <FormControl
                   sx={{ width: resp ? "40ch" : "50ch" }}
                   variant="outlined"
-                  value={signupUser.password}
+                  // value={signupUser.password}
                   onChange={signupHandleChange}
                   required
                 >
@@ -534,6 +647,7 @@ const Login = () => {
     <>
       {registrationStatus && SignUpComponent()}
       {!registrationStatus && LoginComponent()}
+      {modal && <FaceCapture/>}
     </>
   );
 };

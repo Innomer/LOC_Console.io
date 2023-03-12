@@ -4,29 +4,27 @@ const Joi = require("joi");
 const Schema = mongoose.Schema;
 
 const UserProfileSchema = new Schema({
-  name: { type: String, required: true },
+  name: { type: String},
   //   mname: { type: String, required: true },
   //   lname: { type: String, required: true },
-  dob: { type: String, required: true },
-  loc: { type: String, required: true },
-  phoneNo: { type: Number, required: true },
+  dob: { type: String},
+  loc: { type: String},
+  phoneNo: { type: Number},
   email: {
-    type: String,
-    required: true,
-    unique: true,
+    type: String
   },
-  fileName: {
-    type: String,
-    required: true,
-  },
-  filePath: {
-    type: String,
-    required: true,
-  },
-  fileType: {
-    type: String,
-    required: true,
-  },
+  // fileName: {
+  //   type: String,
+  //   required: true,
+  // },
+  // filePath: {
+  //   type: String,
+  //   required: true,
+  // },
+  // fileType: {
+  //   type: String,
+  //   required: true,
+  // },
 });
 
 const validateUserProfileInfo = (data) => {

@@ -74,6 +74,37 @@ const Form = () => {
       }, []);
     
       // ⭐⭐
+      const [data , setData] = useState({
+        name : '',
+        dob : '',
+        loc : '',
+        email : '',
+        phoneNo : '',
+      })
+  
+      const handleChange = (e) => {
+        console.log("Handle Chnage")
+       console.log(e.target.name, e.target.value);
+        setData({...data , [e.target.name]:e.target.value})
+      }
+
+      const handleSubmit = async (e) => {
+        console.log(data);
+        console.log("Handle Submit");
+        e.preventDefault();
+        let url = "http://localhost:8080/api/user/addUserProfile";
+        try {
+          let response = await axios.post(url , data)
+          if(response.status === 200) {
+            console.log("addListing API successfully called from frontend");
+          }
+        } catch(e) {
+          console.log(e);
+        }
+      }
+  
+
+
   return (
     <>
     <Navbar/>
@@ -94,12 +125,13 @@ const Form = () => {
             <h4 style={{ margin: "2rem 0 2rem 0"}}>Enter your picture</h4>
           </Grid>
           <Grid xs={4} style={{}}>
-            <h4 style={{ position:'relative', right:'10rem', marginBottom:'1rem'}}>Enter Name</h4>
+            <h4 style={{ position:'relative', right:'10rem', marginBottom:'1rem'}}>Name</h4>
             <TextField
               id="outlined-search"
               label="Name"
               type="search"
-              name="Name"
+              name="name"
+              onChange={handleChange}
               required
               style={fieldStyle}
             />
@@ -107,7 +139,8 @@ const Form = () => {
             <TextField
               id="outlined-search"
               type="date"
-              name="Name"
+              name="dob"
+              onChange={handleChange}
               required
               style={fieldStyle}
             />
@@ -116,7 +149,8 @@ const Form = () => {
               id="outlined-search"
               label="Phone no."
               type="search"
-              name="Name"
+              name="phoneNo"
+              onChange={handleChange}
               required
               style={fieldStyle}
             />
@@ -127,7 +161,8 @@ const Form = () => {
               id="outlined-search"
               label="Email"
               type="search"
-              name="Name"
+              name="email"
+              onChange={handleChange}
               required
               style={fieldStyle}
             />
@@ -136,14 +171,15 @@ const Form = () => {
               id="outlined-search"
               label="location"
               type="search"
-              name="Name"
+              name="loc"
+              onChange={handleChange}
               required
               style={fieldStyle}
             />
             {/* <Link to="/register/worker"> */}
             
             <EditBtn>Edit</EditBtn>
-            <SubmitBtn onClick={showToastMessage}>Submit</SubmitBtn>
+            <SubmitBtn onClick={showToastMessage} onSubmit={handleSubmit}>Submit</SubmitBtn>
             <ToastContainer/>
             {/* </Link> */}
           </Grid>

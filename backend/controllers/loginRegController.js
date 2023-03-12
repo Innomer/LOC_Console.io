@@ -11,23 +11,15 @@ async function signUpController(req, res) {
         var lname = req.body.lname;
         var email = req.body.email;
         var password = req.body.password;
-        var access_lvl = req.params.role;
+        // var access_lvl = req.params.role;
 
         // const user=new UserModel;
-        const {validate} = validateUserInfo({ fname, lname, email, password, access_lvl });
-        if (validate) {
-            res.json({
-                message: validate
-            })
-        }
-        else {
-            const user = await UserModel.create({ fname, lname, email, password, access_lvl });
+            const user = await UserModel.create({ fname, lname, email, password});
             user.save();
             res.json({
                 message: "Success",
                 user: req.body
             });
-        }
     }
     catch (err) {
         res.json({
@@ -41,38 +33,29 @@ async function loginController(req, res) {
         var email = req.body.email;
         var password = req.body.password;
         const user = await UserModel.findOne({ email });
-
+        console.log(user)
         if (!user) {
             res.json({
                 message: "Email Not Found!"
             });
         }
         else {
-            const validate = await user.isValidPassword(password);
-            if (!validate) {
-                res.json({
-                    message: "Wrong Password! Please Try Again!"
-                })
-            }
-            else {
-                var access_lvl = user.access_lvl;
                 const body = { _id: user._id, email: email };
                 const token = jwt.sign({ user: body }, process.env.JSON_KEY);
-                var isVerified = user.isVerified;
-                //CHECK FOR ISVERIFIED IN FRONTEND ALSO IF NEEDED
-                if (isVerified==="true") {
-                    res.json({
-                        token,
-                        access_lvl,
-                        isVerified
-                    })
-                }
-                else {
-                    var emailOutput=await emailVerificationController(email);
-                    console.log(emailOutput);
-                    return res.json({ redirectLink: `${req.headers.hostname}/email-verification-status` });//CHANGE LINK AS PER FRONTEND ROUTER
-                }
-            }
+                // var isVerified = user.isVerified;
+                // //CHECK FOR ISVERIFIED IN FRONTEND ALSO IF NEEDED
+                // if (isVerified==="true") {
+                //     res.json({
+                //         token,
+                //         // access_lvl,
+                //         isVerified
+                //     })
+                // }
+                // else {
+                //     var emailOutput=await emailVerificationController(email);
+                //     console.log(emailOutput);
+                //     return res.json({ redirectLink: `${req.headers.hostname}/email-verification-status` });//CHANGE LINK AS PER FRONTEND ROUTER
+                // }
         }
     }
     catch (err) {

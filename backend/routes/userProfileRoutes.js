@@ -10,7 +10,7 @@ const { upload } = require("../middlewares/multer");
 
 const router = express.Router();
 
-router.post("/addUserProfile", upload.single("file"), createUserProf);
+router.post("/addUserProfile",createUserProf);
 router.get("/allUserProfiles", getUserProfiles);
 router.get("/:id", getUserProfile);
 router.put("/:id", editUserProfile);

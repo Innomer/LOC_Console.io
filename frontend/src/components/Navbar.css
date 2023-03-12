@@ -6,7 +6,7 @@
     display      : block;
     content      : '';
     /* border-bottom: solid 5px #fff; */
-    border-bottom: solid 5px blue;
+    border-bottom: solid 5px black;  
     transform    : scaleX(0);
     transition   : transform 200ms ease-in-out;
 }

@@ -7,16 +7,20 @@ const {
 const createUserProf = async (request, response) => {
   console.log("userProfileController => createUserProf");
   console.log(request.body);
-  console.log(request.file);
+
+  // console.log(request.file);
+
   //   const hackiName = request.params.id;
-  const image = request.file ? request.file.filename : null;
-  const filename = request.file.originalname;
-  const filepath = request.file.path;
-  const filetype = request.file.mimetype;
+
+  // const image = request.file ? request.file.filename : null;
+  // const filename = request.file.originalname;
+  // const filepath = request.file.path;
+  // const filetype = request.file.mimetype;
+
 //   fileName: req.file.originalname,
 //       filePath: req.file.path,
 //       fileType: req.file.mimetype,
-  console.log("Image declare krne ke baad", image);
+  // console.log("Image declare krne ke baad", image);
 
   const { name, dob, loc, phoneNo, email } = request.body;
 
@@ -39,7 +43,7 @@ const createUserProf = async (request, response) => {
     loc,
     phoneNo,
     email,
-    filename,filepath,filetype,
+    // filename,filepath,filetype,
   });
   try {
     console.log("try");

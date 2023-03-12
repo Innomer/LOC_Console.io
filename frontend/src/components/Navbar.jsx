@@ -363,7 +363,7 @@ const Navbar = () => {
           </Box>
           <Box flexGrow={1} />
           <AccountCircleOutlinedIcon
-            style={{ color: "white", fontSize: "2rem", display: "none" }}
+            style={{ color: "white", fontSize: "3em", display: "none" }}
           />
         </Toolbar>
       </AppBar>

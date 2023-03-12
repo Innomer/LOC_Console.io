@@ -105,7 +105,7 @@ const deleteUserProfile = async (request, response) => {
 };
 
 module.exports = {
-  createUserProf,
+  createUserDoc,
   getUserProfiles,
   getUserProfile,
   editUserProfile,

@@ -1,16 +1,17 @@
 const express = require("express");
 const {
-  createUserProf,
+  createUserDoc,
   getUserProfiles,
   getUserProfile,
   editUserProfile,
   deleteUserProfile,
-} = require("../controllers/userProfileController");
+} = require("../controllers/userDocController");
 const { upload } = require("../middlewares/multer");
+
 
 const router = express.Router();
 
-router.post("/addUserProfile", upload.array("files"), createUserProf);
+router.post("/addUserDoc", upload.array("files"), createUserDoc);
 router.get("/allUserProfiles", getUserProfiles);
 router.get("/:id", getUserProfile);
 router.put("/:id", editUserProfile);
