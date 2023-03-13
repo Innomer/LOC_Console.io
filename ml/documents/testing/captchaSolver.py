@@ -2,9 +2,7 @@ from paddleocr import PaddleOCR,draw_ocr
 from PIL import Image
 import re
 ocr = PaddleOCR(use_angle_cls=True, lang='en')
-# Load the OCR engine
 
-# Load the captcha image
 def solveCap(filePath):
     img_path = filePath
     result = ocr.ocr(img_path, cls=True)
@@ -16,10 +14,7 @@ def solveCap(filePath):
             print(i)
             return i
 
-# # Extract the text from the captcha using PaddleOCR
-# result = ocr.ocr(captcha,cls=True)
-
-# # Process the extracted text to remove unwanted characters and improve accuracy
-# text = ''.join([word[0] for line in result for word in line])
-# text = text.strip().lower()
-# print(text)
+result = ocr.ocr(captcha,cls=True)
+text = ''.join([word[0] for line in result for word in line])
+text = text.strip().lower()
+print(text)
