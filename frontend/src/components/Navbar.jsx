@@ -33,6 +33,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
+import compliantImg from '../images/compliant.png'
 
 const drawerWidth = 200;
 
@@ -159,6 +160,8 @@ const Navbar = () => {
     color: "black",
     padding: "10px 17px",
     fontSize: "1.4rem",
+    fontFamily:'Ubuntu',
+    fontWeight:500
   };
 
   // hamburger
@@ -214,8 +217,9 @@ const Navbar = () => {
               marginLeft: resp ? "2rem" : "5rem",
             }}
           >
-            <img src="../images/compliant.png" alt="icon" />
+            <img src={compliantImg} alt="icon" style={{position: 'relative', height: '2em', width: '2em', top: '0.3em',}} ></img>
           </Typography>
+          <Typography variant='h4' style={{color: 'black', marginLeft: '0.5em', fontWeight: 600, fontFamily:'Ubuntu'}}>VerifyU</Typography>
           <Box
             flexGrow={1}
             style={{
@@ -363,7 +367,7 @@ const Navbar = () => {
           </Box>
           <Box flexGrow={1} />
           <AccountCircleOutlinedIcon
-            style={{ color: "white", fontSize: "3em", display: "none" }}
+            style={{ color: "white", fontSize: "2rem", display: "none" }}
           />
         </Toolbar>
       </AppBar>

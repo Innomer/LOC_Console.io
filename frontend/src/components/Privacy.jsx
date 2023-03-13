@@ -52,12 +52,11 @@ const Privacy = () => {
   return (
     <>
       <Paper
-        style={{
-          backgroundColor: "#d1faf3",
-        }}
+        style={{backgroundColor: "#d1faf3",}}
+
       >
         <Navbar />
-        <div style={{margin:'5rem 30rem', color:'black'}}>
+        <div style={{margin:'5rem 30rem', color:'black', fontFamily:'Ubuntu',}}>
           <p>Current as of March 2023</p>
           <h2>Terms and Conditions</h2>
           <p>

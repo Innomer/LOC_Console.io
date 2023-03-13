@@ -2,22 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserImageSchema = new Schema({
-  image: { type: String, required: true },
-  fileName: {
-    type: String,
-    required: true,
-  },
-  filePath: {
-    type: String,
-    required: true,
-  },
-  fileType: {
-    type: String,
-    required: true,
-  },
+  base64:{type:String}
 });
 
-const UserImageModel = mongoose.model("userProfile", UserImageSchema);
+const UserImageModel = mongoose.model("userImage", UserImageSchema);
 
 module.exports = {
   UserImageModel,

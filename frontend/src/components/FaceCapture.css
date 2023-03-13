@@ -1,5 +1,4 @@
-.mainDiv {
-    display:flex;
-    justify-content: center;
-    align-items: center;
+.mainContainer {
+    height:700px;
+    width:400px;
 }

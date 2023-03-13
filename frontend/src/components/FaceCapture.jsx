@@ -12,6 +12,7 @@ import { display } from "@mui/system";
 // import React, { useState } from "react";
 import Webcam from "react-webcam";
 import './FaceCapture.css';
+import { useNavigate } from "react-router-dom";
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
   width: 400,
@@ -44,20 +45,21 @@ const style = {
 
 
 function FaceCapture() {
+  const navigate=useNavigate();
 
-    const SubmitBtn = styled(Button)({
-        right:"10vw",
-        borderRadius: "0.5rem",
-        marginLeft: "0.2rem",
-        textDecoration: "none",
-        color: "white",
-        fontSize: "1rem",
-        padding: "10px 20px  ",
-        backgroundColor:'black',
-        // backgroundImage: " linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%)",
-        "&:hover": { backgroundColor: "white" , color:'black'},
-        position:'relative',right:'10rem',top:'3rem'
-      });
+  const SubmitBtn = styled(Button)({
+    right: "10vw",
+    borderRadius: "0.5rem",
+    marginLeft: "0.2rem",
+    textDecoration: "none",
+    color: "white",
+    fontSize: "1rem",
+    padding: "10px 20px  ",
+    backgroundColor: 'black',
+    // backgroundImage: " linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%)",
+    "&:hover": { backgroundColor: "white", color: 'black' },
+    position: 'relative', right: '10rem', top: '3rem'
+  });
 
 
   const [open, setOpen] = React.useState(true);
@@ -110,15 +112,15 @@ function FaceCapture() {
     ctx.clearRect(0, 0, photo.width, photo.height);
   };
 
-  const [data , setData] = useState({
-    image : '',
+  const [data, setData] = useState({
+    image: '',
   })
 
   const handleImageUpload = (e) => {
     console.log("Handle Image Upload");
     console.log(e.target.files[0]);
     console.log(e.target.files[0].name);
-    setData({...data , image:e.target.files[0]})
+    setData({ ...data, image: e.target.files[0] })
   }
 
   const handleImageSubmit = async (e) => {
@@ -131,11 +133,11 @@ function FaceCapture() {
     formdata.append("file", data.image);
     console.log("After appending in formData");
     try {
-      let response = await axios.post(url , formdata)
-      if(response.status === 200) {
+      let response = await axios.post(url, formdata)
+      if (response.status === 200) {
         console.log("addListing API successfully called from frontend");
       }
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
   }
@@ -145,34 +147,63 @@ function FaceCapture() {
     getVideo();
   }, [videoRef]);
 
-//   const [show, setShow] = useState(false)
-//   const WebcamComponent = () => <Webcam />
-// const videoConstraints = {
-//   width: 400,
-//   height: 400,
-//   facingMode: 'user',
-// }
-//   const [picture, setPicture] = useState('')
-//   const webcamRef = React.useRef(null)
-//   const capture = React.useCallback(() => {
-//     const pictureSrc = webcamRef.current.getScreenshot()
-//     setPicture(pictureSrc)
-//   })
+  //   const [show, setShow] = useState(false)
+  //   const WebcamComponent = () => <Webcam />
+  // const videoConstraints = {
+  //   width: 400,
+  //   height: 400,
+  //   facingMode: 'user',
+  // }
+  //   const [picture, setPicture] = useState('')
+  //   const webcamRef = React.useRef(null)
+  //   const capture = React.useCallback(() => {
+  //     const pictureSrc = webcamRef.current.getScreenshot()
+  //     setPicture(pictureSrc)
+  //   })
 
-const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState("");
   const webcamRef = React.useRef(null);
   const capture = React.useCallback(() => {
     const pictureSrc = webcamRef.current.getScreenshot();
     setPicture(pictureSrc);
   });
 
-  const handleSubmit=()=>{
+  const handleSubmit = () => {
     console.log(picture);
+    var formdata = new FormData();
+    formdata.append("base64", "");
+
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/api/userImg/addImage", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    var formdata = new FormData();
+    formdata.append("filepath1", picture);
+    formdata.append("filepath2", picture);
+
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    fetch("http://localhost:8000/images/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    
+      setTimeout(()=>navigate('/home'),2000);
   }
 
 
   return (
-    
+
     <>
       <div>
         {/* <Button onClick={handleOpen}>Open modal</Button> */}
@@ -200,10 +231,10 @@ const [picture, setPicture] = useState("");
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description" >
-        {/* <h2 className="mb-5 text-center">
+          {/* <h2 className="mb-5 text-center">
         React Photo Capture using Webcam Examle
       </h2> */}
-      {/* <div>
+          {/* <div>
         {picture == '' ? (
           <Webcam
             audio={false}
@@ -217,7 +248,7 @@ const [picture, setPicture] = useState("");
           <img src={picture} />
         )}
       </div> */}
-      {/* <div>
+          {/* <div>
         {picture != '' ? (
           <button
             onClick={(e) => {
@@ -240,56 +271,64 @@ const [picture, setPicture] = useState("");
           </button>
         )}
       </div> */}
-    <div>
-      <div className="mainDiv">
-        <h2 className="mb-5 text-center">
-          React Photo Capture using Webcam Examle
-        </h2>
-        <div>
-          {picture === "" ? (
-            <Webcam
-              audio={false}
-              height={400}
-              ref={webcamRef}
-              width={400}
-              screenshotFormat="image/jpeg"
-              videoConstraints={videoConstraints}
-            />
-          ) : (
-            <img src={picture} />
-          )}
-        </div>
-        <div>
-          {picture != "" ? (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setPicture();
-              }}
-              className="btn btn-primary"
-            >
-              Retake
-            </button>
-          ) : (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                capture();
-              }}
-              className="btn btn-danger"
-            >
-              Capture
-            </button>
-          )}
-        </div>
-        <div>
-          <img src={picture}></img>
-        </div>
-        {picture!=""?
-        <button onClick={handleSubmit}>Submit</button>
-        :<button style={{display:"none"}}></button>}
-      </div>
-    </div>
+          <div>
+            <Box>
+            <div className="mainContainer">
+              <h2>
+                React Photo Capture using Webcam Example
+              </h2>
+              
+              <Box>
+              <div>
+                {picture === "" ? (
+                  <Webcam
+                    audio={false}
+                    height={350}
+                    ref={webcamRef}
+                    width={350}
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={videoConstraints}
+                  />
+                ) : (
+                  <img src={picture} />
+                )}
+              </div>
+              <div>
+                {picture != "" ? (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setPicture();
+                    }}
+                    className="btn btn-primary"
+                  >
+                    Retake
+                  </button>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      capture();
+                    }}
+                    className="btn btn-danger"
+                  >
+                    Capture
+                  </button>
+                )}
+              </div>
+              </Box>
+              <Box>
+              <div>
+                <img src={picture}></img>
+              </div>
+              {picture != "" ?
+                <button onClick={handleSubmit}>Submit</button>
+                : <button style={{ display: "none" }}></button>}
+                </Box>
+            </div>
+            
+            </Box>
+          </div>
         </Modal>
       </div>
     </>

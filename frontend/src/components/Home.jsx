@@ -1,6 +1,7 @@
+import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button , CardContent , Typography,CardActions } from "@mui/material";
 import './Home.css';
 import Navbar from './Navbar.jsx';
 import './Navbar.css';
@@ -8,6 +9,7 @@ import { ProjectCard } from './Documents.jsx';
 import AadharCard from '../images/AadharCard.jpg';
 import { useState } from "react";
 import axios from "axios";
+import abc from "./abc.jpg";
 
 const Home = () => {
     // const projects = [
@@ -98,7 +100,7 @@ const Home = () => {
     
         // making request to the server
         let reqOptions = {
-          url: 'localhost:8080/api/userDoc/addUserDoc',
+          url: 'http://localhost:8080/api/userDoc/addUserDoc',
           method: 'POST',
           data: formData,
         };
@@ -126,7 +128,9 @@ const Home = () => {
         <Box className="background">
             <Navbar />
             <Box sx={{display: 'flex'}}>
-                <Box className='document'></Box>
+                <Box className='document'>
+                  <img src={abc} height="650" width={"500"} ></img>
+                </Box>
                 {/* <Box className='tab-box'>   
                     {
                         projects.map((project,index) => {
@@ -138,10 +142,11 @@ const Home = () => {
                 </Box> */}
                  <Box>
                  <Grid item sm={6}>
-          <h1> Album upload</h1>
+          <h1 fontFamily="Ubuntu"> Documents upload</h1>
           <form onSubmit={handleMultipleSubmit}>
             <TextField
               // Multiple song files Input
+              sx={{width:300 , marginLeft:12}}
               name="files"
               type="file"
               required
@@ -155,7 +160,7 @@ const Home = () => {
             {values.selectMultipleFiles ? (
               Object.keys(values.multipleFiles).map((keyName, keyIndex) => (
                 <div key={keyIndex}>
-                  <p>Song no. {keyIndex + 1} </p>
+                  {/* <p>Song no. {keyIndex + 1} </p>
                   <p>Filename: {values.multipleFiles[keyName].name}</p>
                   <p>Filetype: {values.multipleFiles[keyName].type}</p>
                   <p>
@@ -164,7 +169,26 @@ const Home = () => {
                       keyName
                     ].lastModifiedDate.toLocaleDateString()}
                   </p>
-                  <br />
+                  <br /> */}
+                  <React.Fragment>
+                    <CardContent sx={{backgroundColor:"#81cdc6" , marginTop:5,marginLeft:4 , borderRadius:6}}>
+                      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                      {values.multipleFiles[keyName].name}
+                      </Typography>
+                      <Typography variant="h5" component="div">
+                      {values.multipleFiles[keyName].type}
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Last modified:{' '}
+                    {values.multipleFiles[
+                      keyName
+                    ].lastModifiedDate.toLocaleDateString()}
+                      </Typography>
+                    </CardContent>
+                    {/* <CardActions>
+                      <Button size="small">Learn More</Button>
+                    </CardActions> */}
+                  </React.Fragment>
                 </div>
               ))
             ) : (
@@ -175,8 +199,9 @@ const Home = () => {
             <CustomButton
               // Multiple songs upload button
               name="Upload"
-              col="black"
-              buttonColor="green-button"
+              col="white"
+              bgc="blue"
+              buttonColor="blue-button"
             />
           </form>
         </Grid>

@@ -1,11 +1,11 @@
 const express = require("express");
-const { addListing, getListings } = require("../controller/listingController");
+const { addImageModel, getUserImage } = require("../controllers/userImageController");
 const { upload } = require("../middlewares/multer");
 const router = express.Router();
 
-router.post("/addListing", upload.single("file") ,addListing);
+router.post("/addImage", addImageModel);
 // router.get("/allListing", getListings);
-router.get("/:id", getListing);
+router.get("/:id", getUserImage);
 // router.put("/:id", editListing);
 // router.delete("/:id", deleteListing);
 
@@ -17,3 +17,4 @@ router.get("/:id", getListing);
 // router.get("/home", auth, (req, res) => {
 //   console.log("Welcome");
 //   res.status(200).send("Welcome 🙌 ");
+module.exports=router;

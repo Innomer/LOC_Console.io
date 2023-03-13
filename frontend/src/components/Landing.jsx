@@ -42,7 +42,6 @@ const Landing = () => {
 
   const LoginButton = styled(Button)({
     right: resp ? "10vw" : "10vw",
-    // width:50,
     borderRadius: "0.5rem",
     marginLeft: "0.2rem",
     textDecoration: "none",
@@ -137,7 +136,7 @@ const Landing = () => {
     backgroundImage: `url(${homeimg})`,
     height: "38rem",
     maxWidth: "100vw",
-    width: "85vw",
+    width: "80vw",
     backgroundSize: "cover",
     // backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -249,7 +248,8 @@ const Landing = () => {
               fontSize: "4rem",
               // color:'white'
               color:'black',
-              fontWeight:'700'
+              fontWeight:'700',
+              fontFamily:'Ubuntu'
             }}
           >
             Create your{" "}
@@ -262,7 +262,9 @@ const Landing = () => {
               fontSize: "4rem",
               // color:'white'
               color:'black',
-              fontWeight:'700'
+              fontWeight:'700',
+              fontFamily:'Ubuntu'
+              
             }}
           >
             Digital Identity
@@ -271,10 +273,11 @@ const Landing = () => {
             style={{
               margin: "0 0",
               position: "relative",
-              right: "3rem",
+              right: "4rem",
               fontSize: "1.2rem",
               // color:'white'
-              color:'black'
+              color:'black',
+              fontFamily:'Ubuntu'
             }}
           >
             {" "}

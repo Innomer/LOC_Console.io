@@ -10,6 +10,7 @@ const fileUploadRoutes=require('./routes/fileUploadRoutes');
 const bodyParser = require('body-parser');
 const userDocRoutes=require('./routes/userDocRoutes');
 const userProfRoutes = require('./routes/userProfileRoutes');
+const userImageRoutes = require('./routes/userImageRoutes');
 
 mongoose.set("strictQuery", true);
 mongoose.connect('mongodb://0.0.0.0:27017/loc', { useUnifiedTopology: true, useNewUrlParser: true, });
@@ -28,6 +29,7 @@ app.use('/', loginRoutes);
 app.use('/admin', adminRoutes);
 app.use('/file',fileUploadRoutes);
 app.use('/api/userDoc',userDocRoutes);
+app.use('/api/userImg',userImageRoutes);
 app.use('/api/userProf',userProfRoutes);
 // app.use('/chat',chatRoutes);
 

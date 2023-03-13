@@ -107,13 +107,16 @@ const Form = () => {
 
   return (
     <>
+    <div style={{backgroundImage:"url('https://img.freepik.com/free-vector/papercut-background-wavy-style_1017-15450.jpg?w=900&t=st=1678597141~exp=1678597741~hmac=170a077a1137dc8dfcbb2db0a6ab04149ea29f87970303c45407b08814055ddf')",   backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center center',}}>
     <Navbar/>
     <div data-aos="fade-up">
       <Paper
         elevation={3}
         style={{ backgroundColor: "#d1faf3", margin: "0rem 5rem" }}
       >
-        <h2 style={{ margin: "2rem 0 4rem 0",  position:'relative', top:'1rem'}}>Set up your profile</h2>
+        <h1 style={{ margin: "2rem 0 4rem 0",  position:'relative', top:'1rem',fontFamily:'Ubuntu',fontWeight:700}}>Set up your profile</h1>
         <Grid container spacing={2}>
           <Grid xs={3}>
             <Paper
@@ -122,10 +125,10 @@ const Form = () => {
                position:'relative', left:'2rem'
             }}
             ></Paper>
-            <h4 style={{ margin: "2rem 0 2rem 0"}}>Enter your picture</h4>
+            <h4 style={{ margin: "2rem 0 2rem 0",fontFamily:'Ubuntu',fontWeight:600}}>Enter your picture</h4>
           </Grid>
           <Grid xs={4} style={{}}>
-            <h4 style={{ position:'relative', right:'10rem', marginBottom:'1rem'}}>Name</h4>
+            <h4 style={{ position:'relative', right:'10rem', marginBottom:'1rem',fontFamily:'Ubuntu',fontWeight:600}}>Name</h4>
             <TextField
               id="outlined-search"
               label="Name"
@@ -135,7 +138,7 @@ const Form = () => {
               required
               style={fieldStyle}
             />
-            <h4 style={{ position:'relative', right:'11rem', marginBottom:'1rem'}}>DOB</h4>
+            <h4 style={{ position:'relative', right:'11rem', marginBottom:'1rem',fontFamily:'Ubuntu',fontWeight:600}}>DOB</h4>
             <TextField
               id="outlined-search"
               type="date"
@@ -144,7 +147,7 @@ const Form = () => {
               required
               style={fieldStyle}
             />
-            <h4 style={{ position:'relative', right:'10rem', marginBottom:'1rem'}}>Phone No.</h4>
+            <h4 style={{ position:'relative', right:'9rem', marginBottom:'1rem',fontFamily:'Ubuntu',fontWeight:600}}>Phone No.</h4>
             <TextField
               id="outlined-search"
               label="Phone no."
@@ -156,7 +159,7 @@ const Form = () => {
             />
             </Grid>
             <Grid xs={3} style={{}}>
-            <h4 style={{ position:'relative', right:'9rem', marginBottom:'1rem'}}>Email</h4>
+            <h4 style={{ position:'relative', right:'9rem', marginBottom:'1rem',fontFamily:'Ubuntu',fontWeight:600}}>Email</h4>
             <TextField
               id="outlined-search"
               label="Email"
@@ -166,7 +169,7 @@ const Form = () => {
               required
               style={fieldStyle}
             />
-            <h4 style={{ position:'relative', right:'8rem', marginBottom:'1rem'}}>Location</h4>
+            <h4 style={{ position:'relative', right:'8rem', marginBottom:'1rem',fontFamily:'Ubuntu',fontWeight:600}}>Location</h4>
             <TextField
               id="outlined-search"
               label="location"
@@ -185,6 +188,7 @@ const Form = () => {
           </Grid>
         </Grid>
       </Paper>
+      </div>
       </div>
     </>
   );

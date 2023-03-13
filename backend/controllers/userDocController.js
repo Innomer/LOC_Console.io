@@ -1,6 +1,11 @@
 const {
   UserDocModel,
 } = require("../models/userDocModel");
+const bcrypt =require('bcrypt');
+const QRCode = require('qrcode')
+const fs=require('fs');
+
+
 
 const createUserDoc = async (request, response) => {
   console.log("userDocController => createUserProf");
@@ -8,21 +13,54 @@ const createUserDoc = async (request, response) => {
   console.log(request.files);
   //   const hackiName = request.params.id;
   let docArray = [];
-     req.files.forEach((element) => {
-       const file = {
-         fileName: element.originalname,
-         filePath: element.path,
-         fileType: element.mimetype,
-       };
-       docArray.push(file);
-     });
+  let hashSen = "";
+  var userData = [];
+  req.files.forEach((element) => {
+    const file = {
+      fileName: element.originalname,
+      filePath: element.path,
+      fileType: element.mimetype,
+    };
+    var axios = require('axios');
+    var FormData = require('form-data');
+    var data = new FormData();
+    data.append('filepath', file.filePath);
+
+    var config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'localhost:8000/docs/',
+      headers: {
+        ...data.getHeaders()
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        hashSen = JSON.stringify(response.data);
+        userData = hashSen.split('-');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    qrString = bcrypt.hash({ hashSen }, 10);
+    QRCode.toDataURL(stringdata, function (err, url) {
+      if (err) return console.log("error occurred")
+      console.log(url);
+      const buffer = Buffer.from(url, "base64");
+      fs.writeFileSync("C:\MY FILES\Hacki\LOC_Console.io\frontend\src\images\QR.jpg", buffer)
+    })
+    docArray.push(file);
+  });
   // const image = request.file ? request.file.filename : null;
   // console.log("Image declare krne ke baad", image);
 
-   const multipleDocs = new MultipleFile({
-     albumTitle: req.body.recognitionID,
-     docs: docArray,
-   });
+  const multipleDocs = new MultipleFile({
+    albumTitle: req.body.recognitionID,
+    docs: docArray,
+  });
 
 
   // const { name, dob, loc, phoneNo, email } = request.body;
@@ -51,8 +89,8 @@ const createUserDoc = async (request, response) => {
 
   try {
     console.log("try");
-   await multipleDocs.save();
-   console.log(multipleDocs);
+    await multipleDocs.save();
+    console.log(multipleDocs);
     console.log("UserProfile created successfully");
     response.status(201).json(multipleDocs);
   } catch (error) {

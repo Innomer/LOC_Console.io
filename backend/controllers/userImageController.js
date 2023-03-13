@@ -3,9 +3,9 @@ const { UserImageModel} = require("../models/userImageModel");
 const addImageModel = async (request, response) => {
   console.log("Usercontroller => addListing");
 //   console.log(request.body);
-  console.log(request.file);
-  const image = (request.file) ? request.file.filename : null ;
-  console.log("Image declare krne ke baad",image);
+  // console.log(request.file);
+  // const image = (request.file) ? request.file.filename : null ;
+  // console.log("Image declare krne ke baad",image);
   // const listing = request.body;
 
 //   const {title , description , location , startDate , endDate , rules , price , noOfPeople , ammenities } = request.body;
@@ -26,13 +26,13 @@ const addImageModel = async (request, response) => {
 //     console.log(error.details[0].message);
 //     return response.status(400).send({ message: error.details[0].message });
 //   }
-
+  base64=request.body.base64;
   const newUserImage = new UserImageModel({
-    image,
+    base64,
   });
   try {
     console.log("try");
-    await newListing.save();
+    await newUserImage.save();
     response.status(201).json(newUserImage);
     console.log("newUserImage done successfully");
     // console.log(listing)
